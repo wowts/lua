@@ -57,7 +57,7 @@ function wipe(x) {
     }
 }
 exports.wipe = wipe;
-function assert(condition) {
+function assert(condition, message) {
     if (!condition) {
         throw new Error("assert " + condition);
     }
@@ -102,10 +102,11 @@ exports.error = error;
 function rawset(table, key, value) { }
 exports.rawset = rawset;
 function setmetatable(table, metatable) {
-    if (metatable.__index) {
+    const index = metatable.__index;
+    if (index) {
         const handler = {
             get: (target, key) => {
-                return key in target ? target[key] : metatable.__index(target, key);
+                return key in target ? target[key] : index(target, key);
             }
         };
         return new Proxy(table, handler);
@@ -129,3 +130,4 @@ function lualength(array) {
     return array.n;
 }
 exports.lualength = lualength;
+exports._G = {};

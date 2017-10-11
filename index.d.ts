@@ -14,7 +14,7 @@ export declare function tonumber(a: any): number;
 export declare function tostring(s: any): string;
 export declare function type(a: any): "table" | "number" | "string" | "function" | "boolean";
 export declare function wipe(x: any): void;
-export declare function assert(condition: any): void;
+export declare function assert(condition: any, message?: string): void;
 export declare function unpack<T>(t: LuaArray<T>, first?: number, count?: number): T[];
 export declare function tostringall(...text: object[]): string[];
 export declare function select<T>(index: "#", t: T[]): number;
@@ -24,7 +24,8 @@ export declare function hooksecurefunc(table: any, methodName: string, hook: () 
 export declare function error(error: string, info: number): void;
 export declare function rawset(table: any, key: string, value: any): void;
 export declare function setmetatable<T extends object>(table: T, metatable: {
-    __index: (o: T, key: string) => any;
+    __index?: (o: T, key: string) => any;
 }): T;
 export declare function loadstring(t: string): () => void;
 export declare function lualength<T>(array: (LuaArray<T> | string)): number;
+export declare const _G: any;

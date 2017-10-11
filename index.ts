@@ -67,7 +67,7 @@ export function wipe(x: any) {
     }
 }
 
-export function assert(condition: any) {
+export function assert(condition: any, message?: string) {
     if (!condition) {
         throw new Error("assert " + condition);
     }
@@ -108,11 +108,12 @@ export function hooksecurefunc(table:any, methodName:string, hook:()=>void) {
 
 export function error(error:string, info:number):void{}
 export function rawset(table: any, key:string, value:any){}
-export function setmetatable<T extends object>(table: T, metatable: { __index: (o:T, key:string) => any}):T { 
-    if (metatable.__index) {
+export function setmetatable<T extends object>(table: T, metatable: { __index?: (o:T, key:string) => any}):T { 
+    const index = metatable.__index;
+    if (index) {
         const handler = {
             get: (target: T, key: keyof T) => {
-                return key in target ? target[key] : metatable.__index(target, key);
+                return key in target ? target[key] : index(target, key);
             }
         };
         return new Proxy(table, handler);
@@ -133,3 +134,5 @@ export function lualength<T>(array: (LuaArray<T>|string)):number {
     }
     return array.n;
 }
+
+export const _G:any = {};
