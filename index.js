@@ -121,7 +121,7 @@ function lualength(array) {
     if (!array.n) {
         for (let i = 1;; i++) {
             if (!array[i]) {
-                array.n = i;
+                array.n = i - 1;
                 break;
             }
         }

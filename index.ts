@@ -126,7 +126,7 @@ export function lualength<T>(array: (LuaArray<T>|string)):number {
     if (!array.n) {
         for (let i = 1; ; i++){
             if (!array[i]) {
-                array.n = i;
+                array.n = i - 1;
                 break;
             }
         }

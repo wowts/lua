@@ -4,13 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "ava index.spec.js",
+    "test:watch": "ava -w index.spec.js",
     "prepublish": "tsc -p ."
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^2.5.3"
+    "typescript": "^2.5.3",
+    "ava": "^0.22.0"
   },
   "repository": {
     "url": "https://github.com/wowts/lua"
