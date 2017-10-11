@@ -1,23 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function ipairs(a) {
-    var pairs = [];
-    for (var k in a) {
+    const pairs = [];
+    for (let k in a) {
         pairs.push([parseInt(k), a[k]]);
     }
-    return pairs.sort(function (x, y) { return x[0] < y[0] ? -1 : (x[0] == y[0] ? 0 : 1); });
+    return pairs.sort((x, y) => x[0] < y[0] ? -1 : (x[0] == y[0] ? 0 : 1));
 }
 exports.ipairs = ipairs;
 function pairs(a) {
-    var pairs = [];
-    for (var k in a) {
+    const pairs = [];
+    for (let k in a) {
         pairs.push([k, a[k]]);
     }
     return pairs;
 }
 exports.pairs = pairs;
 function next(a) {
-    for (var k in a) {
+    for (let k in a) {
         return [k, a[k]];
     }
     return undefined;
@@ -48,29 +48,40 @@ function type(a) {
 }
 exports.type = type;
 function wipe(x) {
-    var keys = [];
-    for (var i in x) {
+    const keys = [];
+    for (let i in x) {
         keys.push(i);
     }
-    for (var _i = 0, keys_1 = keys; _i < keys_1.length; _i++) {
-        var k = keys_1[_i];
+    for (const k of keys) {
         delete x[k];
     }
 }
 exports.wipe = wipe;
 function assert(condition) {
+    if (!condition) {
+        throw new Error("assert " + condition);
+    }
 }
 exports.assert = assert;
 function unpack(t, first, count) {
-    return undefined;
+    const ret = [];
+    for (let i = first || 1;; i++) {
+        if (count === undefined) {
+            if (ret[i] === undefined)
+                break;
+        }
+        else {
+            if (count == 0)
+                break;
+            count--;
+        }
+        ret.push(t[i]);
+    }
+    return ret;
 }
 exports.unpack = unpack;
-function tostringall() {
-    var text = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        text[_i] = arguments[_i];
-    }
-    return text.map(function (x) { return x.toString(); });
+function tostringall(...text) {
+    return text.map(x => x.toString());
 }
 exports.tostringall = tostringall;
 function select(index, t) {
@@ -79,11 +90,7 @@ function select(index, t) {
     return t[index];
 }
 exports.select = select;
-function strjoin(separator) {
-    var text = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        text[_i - 1] = arguments[_i];
-    }
+function strjoin(separator, ...text) {
     return text.join(separator);
 }
 exports.strjoin = strjoin;
@@ -96,8 +103,8 @@ function rawset(table, key, value) { }
 exports.rawset = rawset;
 function setmetatable(table, metatable) {
     if (metatable.__index) {
-        var handler = {
-            get: function (target, key) {
+        const handler = {
+            get: (target, key) => {
                 return key in target ? target[key] : metatable.__index(target, key);
             }
         };
@@ -106,6 +113,19 @@ function setmetatable(table, metatable) {
     return table;
 }
 exports.setmetatable = setmetatable;
-function loadstring(t) { return undefined; }
+function loadstring(t) { throw Error("Not implemented"); }
 exports.loadstring = loadstring;
-//# sourceMappingURL=index.js.map
+function lualength(array) {
+    if (typeof (array) === "string")
+        return array.length;
+    if (!array.n) {
+        for (let i = 1;; i++) {
+            if (!array[i]) {
+                array.n = i;
+                break;
+            }
+        }
+    }
+    return array.n;
+}
+exports.lualength = lualength;

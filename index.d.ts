@@ -15,15 +15,16 @@ export declare function tostring(s: any): string;
 export declare function type(a: any): "table" | "number" | "string" | "function" | "boolean";
 export declare function wipe(x: any): void;
 export declare function assert(condition: any): void;
-export declare function unpack<T>(t: LuaArray<T>, first?: any, count?: any): T[];
+export declare function unpack<T>(t: LuaArray<T>, first?: number, count?: number): T[];
 export declare function tostringall(...text: object[]): string[];
 export declare function select<T>(index: "#", t: T[]): number;
 export declare function select<T>(index: number, t: T[]): T;
 export declare function strjoin(separator: string, ...text: string[]): string;
-export declare function hooksecurefunc(table: any, methodName: any, hook: any): void;
+export declare function hooksecurefunc(table: any, methodName: string, hook: () => void): void;
 export declare function error(error: string, info: number): void;
-export declare function rawset(table: any, key: any, value: any): void;
-export declare function setmetatable<T>(table: T, metatable: {
+export declare function rawset(table: any, key: string, value: any): void;
+export declare function setmetatable<T extends object>(table: T, metatable: {
     __index: (o: T, key: string) => any;
 }): T;
 export declare function loadstring(t: string): () => void;
+export declare function lualength<T>(array: (LuaArray<T> | string)): number;

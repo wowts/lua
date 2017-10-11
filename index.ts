@@ -120,3 +120,16 @@ export function setmetatable<T extends object>(table: T, metatable: { __index: (
     return table;
 }
 export function loadstring(t: string):() => void { throw Error("Not implemented") }
+
+export function lualength<T>(array: (LuaArray<T>|string)):number {
+    if (typeof (array) === "string") return array.length;
+    if (!array.n) {
+        for (let i = 1; ; i++){
+            if (!array[i]) {
+                array.n = i;
+                break;
+            }
+        }
+    }
+    return array.n;
+}
