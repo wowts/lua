@@ -103,7 +103,7 @@ export function strjoin(separator: string, ...text:string[]) {
     return text.join(separator);
 }
 
-export function hooksecurefunc(table:any, methodName:string, hook:()=>void) {
+export function hooksecurefunc(table:any, methodName:string, hook:(...args:any[])=>void) {
 }
 
 export function error(error:string, info:number):void{}
