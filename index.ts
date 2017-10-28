@@ -1,6 +1,5 @@
 export interface LuaArray<T> {
     [key:number]:T;
-    n?:number;
 }
 
 export interface LuaObj<T> {
@@ -10,10 +9,11 @@ export interface LuaObj<T> {
 
 export function ipairs<T>(a:LuaArray<T>) {
     const pairs:[number, T][] = [];
-    for (let k in a) {
-        pairs.push([parseInt(k), a[k]]);
+    for (let i = 1; ; i++) {
+        if (!a[i]) break;
+        pairs.push([i, a[i]]);
     }
-    return pairs.sort((x,y) => x[0] < y[0] ? -1 : (x[0] == y[0] ? 0 : 1));
+    return pairs;
 }
 
 export function pairs<T = any>(a:LuaObj<T>):[string, T][]
@@ -41,7 +41,7 @@ export function tostring(s: any): string {
     return s.toString();
 }
 
-export function type(a: any) : "table" | "number" | "string" | "function" | "boolean" {
+export function type(a: any) : "table" | "number" | "string" | "function" | "boolean" | undefined {
     if (typeof(a) === "number") {
         return "number";
     }
@@ -53,6 +53,9 @@ export function type(a: any) : "table" | "number" | "string" | "function" | "boo
     }
     if (typeof(a) === "boolean") {
         return "boolean";
+    }
+    if (typeof(a) === "undefined") {
+        return undefined;
     }
     return "table";
 }
@@ -124,15 +127,18 @@ export function loadstring(t: string):() => void { throw Error("Not implemented"
 
 export function lualength<T>(array: (LuaArray<T>|string)):number {
     if (typeof (array) === "string") return array.length;
-    if (!array.n) {
-        for (let i = 1; ; i++){
-            if (!array[i]) {
-                array.n = i - 1;
-                break;
-            }
+    let length = 0;
+    for (let i = 1; ; i++){
+        if (!array[i]) {
+            length = i - 1;
+            break;
         }
     }
-    return array.n;
+    return length;
+}
+
+export function truthy<T>(a: T[]) {
+    return a.length > 0;
 }
 
 export const _G:any = {};

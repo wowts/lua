@@ -2,10 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 function ipairs(a) {
     const pairs = [];
-    for (let k in a) {
-        pairs.push([parseInt(k), a[k]]);
+    for (let i = 1;; i++) {
+        if (!a[i])
+            break;
+        pairs.push([i, a[i]]);
     }
-    return pairs.sort((x, y) => x[0] < y[0] ? -1 : (x[0] == y[0] ? 0 : 1));
+    return pairs;
 }
 exports.ipairs = ipairs;
 function pairs(a) {
@@ -43,6 +45,9 @@ function type(a) {
     }
     if (typeof (a) === "boolean") {
         return "boolean";
+    }
+    if (typeof (a) === "undefined") {
+        return undefined;
     }
     return "table";
 }
@@ -119,15 +124,18 @@ exports.loadstring = loadstring;
 function lualength(array) {
     if (typeof (array) === "string")
         return array.length;
-    if (!array.n) {
-        for (let i = 1;; i++) {
-            if (!array[i]) {
-                array.n = i - 1;
-                break;
-            }
+    let length = 0;
+    for (let i = 1;; i++) {
+        if (!array[i]) {
+            length = i - 1;
+            break;
         }
     }
-    return array.n;
+    return length;
 }
 exports.lualength = lualength;
+function truthy(a) {
+    return a.length > 0;
+}
+exports.truthy = truthy;
 exports._G = {};
