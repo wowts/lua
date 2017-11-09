@@ -126,7 +126,7 @@ function lualength(array) {
         return array.length;
     let length = 0;
     for (let i = 1;; i++) {
-        if (!array[i]) {
+        if (array[i] === undefined) {
             length = i - 1;
             break;
         }
