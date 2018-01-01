@@ -6,7 +6,7 @@ export interface LuaObj<T> {
     [key: string]: T;
 }
 export declare function ipairs<T>(a: LuaArray<T>): [number, T][];
-export declare function pairs<T = any>(a: LuaObj<T>): [string, T][];
+export declare function pairs<T = any>(a: LuaObj<T>): [keyof typeof a, T][];
 export declare function pairs<T = any>(a: LuaArray<T>): [number, T][];
 export declare function next<T>(a: LuaArray<T>): (string | T)[] | undefined;
 export declare function tonumber(a: any): number;

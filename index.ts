@@ -16,9 +16,9 @@ export function ipairs<T>(a:LuaArray<T>) {
     return pairs;
 }
 
-export function pairs<T = any>(a:LuaObj<T>):[string, T][]
+export function pairs<T = any>(a:LuaObj<T>):[keyof typeof a, T][]
 export function pairs<T = any>(a:LuaArray<T>):[number, T][]
-export function pairs<T = any>(a:LuaObj<T>):[string|number, T][] {
+export function pairs<T = any>(a:LuaObj<T>):[keyof typeof a|number, T][] {
     const pairs:[string, T][] = [];
     for (let k in a) {
         pairs.push([k, a[k]]);
