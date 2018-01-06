@@ -1,3 +1,7 @@
+export interface LuaMap<TKey, TValue> {
+    next(control:number):[TKey, TValue];
+}
+
 export interface LuaArray<T> {
     [key:number]:T;
 }
@@ -16,12 +20,14 @@ export function ipairs<T>(a:LuaArray<T>) {
     return pairs;
 }
 
-export function pairs<T = any>(a:LuaObj<T>):[keyof typeof a, T][]
-export function pairs<T = any>(a:LuaArray<T>):[number, T][]
+export function pairs<T>(a:LuaObj<T>):[keyof typeof a, T][]
+export function pairs<T, TValue>(a: LuaMap<T, TValue>):[T, TValue][]
+export function pairs<T>(a:LuaArray<T>):[number, T][]
+export function pairs<T>(a: T):[keyof typeof a, any][]
 export function pairs<T = any>(a:LuaObj<T>):[keyof typeof a|number, T][] {
-    const pairs:[string, T][] = [];
+    const pairs:[keyof typeof a, T][] = [];
     for (let k in a) {
-        pairs.push([k, a[k]]);
+        pairs.push([<any>k, a[k]]);
     }
     return pairs;
 }
