@@ -30,7 +30,7 @@ export declare function rawset(table: any, key: string, value: any): void;
 export declare function setmetatable<T extends object>(table: T, metatable: {
     __index?: (o: T, key: string) => any;
 }): T;
-export declare function loadstring(t: string): () => void;
+export declare function loadstring(t: string): () => any;
 export declare function lualength<T>(array: (LuaArray<T> | string)): number;
 export declare function truthy<T>(a: T[]): boolean;
 export declare const _G: any;

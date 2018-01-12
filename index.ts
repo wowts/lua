@@ -129,7 +129,7 @@ export function setmetatable<T extends object>(table: T, metatable: { __index?: 
     }
     return table;
 }
-export function loadstring(t: string):() => void { throw Error("Not implemented") }
+export function loadstring(t: string):() => any { throw Error("Not implemented") }
 
 export function lualength<T>(array: (LuaArray<T>|string)):number {
     if (typeof (array) === "string") return array.length;
