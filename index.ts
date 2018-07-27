@@ -7,7 +7,6 @@ export interface LuaArray<T> {
 }
 
 export interface LuaObj<T> {
-    [key: number]:T;
     [key: string]:T;
 }
 
@@ -20,14 +19,14 @@ export function ipairs<T>(a:LuaArray<T>) {
     return pairs;
 }
 
-export function pairs<T>(a:LuaObj<T>):[keyof typeof a, T][]
+export function pairs<T>(a:LuaObj<T>):[string, T][]
 export function pairs<T, TValue>(a: LuaMap<T, TValue>):[T, TValue][]
-export function pairs<T>(a:LuaArray<T>):[number, T][]
+export function pairs<T>(a:LuaArray<T>):[keyof typeof a, T][]
 export function pairs<T>(a: T):[keyof typeof a, any][]
-export function pairs<T = any>(a:LuaObj<T>):[keyof typeof a|number, T][] {
-    const pairs:[keyof typeof a, T][] = [];
+export function pairs<T = any>(a:T):[keyof typeof a, any][] {
+    const pairs:[keyof typeof a, any][] = [];
     for (let k in a) {
-        pairs.push([<any>k, a[k]]);
+        pairs.push([k, a[k]]);
     }
     return pairs;
 }
@@ -122,7 +121,7 @@ export function setmetatable<T extends object>(table: T, metatable: { __index?: 
     if (index) {
         const handler = {
             get: (target: T, key: keyof T) => {
-                return key in target ? target[key] : index(target, key);
+                return key in target ? target[key] : index(target, <string>key);
             }
         };
         return new Proxy(table, handler);
