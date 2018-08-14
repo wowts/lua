@@ -104,7 +104,7 @@ export function select<T>(index: "#", t: T[]): number;
 export function select<T>(index: number, t: T[]): T;
 export function select<T>(index: number|"#", t: T[]): T|number{
     if (index == "#") return t.length;
-    return t[index + 1];
+    return t[index - 1];
 }
 
 export function strjoin(separator: string, ...text:string[]) {

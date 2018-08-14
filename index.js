@@ -92,7 +92,7 @@ exports.tostringall = tostringall;
 function select(index, t) {
     if (index == "#")
         return t.length;
-    return t[index + 1];
+    return t[index - 1];
 }
 exports.select = select;
 function strjoin(separator, ...text) {
