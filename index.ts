@@ -19,19 +19,27 @@ export function ipairs<T>(a:LuaArray<T>) {
     return pairs;
 }
 
-export function pairs<T>(a:LuaObj<T>):[string, T][]
-export function pairs<T, TValue>(a: LuaMap<T, TValue>):[T, TValue][]
-export function pairs<T>(a:LuaArray<T>):[keyof typeof a, T][]
-export function pairs<T>(a: T):[keyof typeof a, any][]
-export function pairs<T = any>(a:T):[keyof typeof a, any][] {
-    const pairs:[keyof typeof a, any][] = [];
+export function pairs<T, TValue>(a: LuaMap<T, TValue>): [T, TValue][];
+export function pairs<T>(a: LuaObj<T>): [string, T][];
+export function pairs<T>(a: LuaArray<T>): [number, T][];
+export function pairs<T>(a: LuaObj<T>): [keyof typeof a, T][] {
+    const pairs:[keyof typeof a, T][] = [];
     for (let k in a) {
         pairs.push([k, a[k]]);
     }
     return pairs;
 }
 
-export function next<T>(a:LuaArray<T>) {
+declare type Diff<T, U> = T extends U ? never : T;
+export function kpairs<T>(a: T): [keyof typeof a, Diff<T[keyof typeof a], undefined>][] {
+    const pairs:[Extract<keyof typeof a, string>, Diff<T[keyof typeof a], undefined>][] = [];
+    for (let k in a) {
+        pairs.push([k, a[k] as any]);
+    }
+    return pairs;
+}
+
+export function next<T>(a:T) {
     for (let k in a) {
         return [k, a[k]];
     }
@@ -82,11 +90,11 @@ export function assert(condition: any, message?: string) {
     }
 }
 
-export function unpack<T>(t:LuaArray<T>, first?:number, count?:number):T[] {
-    const ret:T[] = [];
+export function unpack<T>(t:LuaArray<T>, first?:number, count?:number):(T|undefined)[] {
+    const ret:(T|undefined)[] = [];
     for(let i = first || 1;; i++) {
         if (count === undefined) {
-            if (ret[i] === undefined) break;
+            if (t[i] === undefined) break;
         }
         else {
             if (count == 0) break;

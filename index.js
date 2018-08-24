@@ -18,6 +18,14 @@ function pairs(a) {
     return pairs;
 }
 exports.pairs = pairs;
+function kpairs(a) {
+    const pairs = [];
+    for (let k in a) {
+        pairs.push([k, a[k]]);
+    }
+    return pairs;
+}
+exports.kpairs = kpairs;
 function next(a) {
     for (let k in a) {
         return [k, a[k]];
@@ -73,7 +81,7 @@ function unpack(t, first, count) {
     const ret = [];
     for (let i = first || 1;; i++) {
         if (count === undefined) {
-            if (ret[i] === undefined)
+            if (t[i] === undefined)
                 break;
         }
         else {
