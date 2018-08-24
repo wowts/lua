@@ -26,7 +26,8 @@ function next(a) {
 }
 exports.next = next;
 function tonumber(a) {
-    return parseInt(a);
+    const result = parseInt(a);
+    return isNaN(result) ? 0 : result;
 }
 exports.tonumber = tonumber;
 function tostring(s) {

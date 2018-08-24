@@ -26,3 +26,15 @@ ava_1.test("length of an empty array", t => {
     // Assert
     t.is(result, 0);
 });
+ava_1.test("tonumber of a number returns a number", t => {
+    // Act
+    const result = index_1.tonumber("18");
+    // Assert
+    t.is(result, 18);
+});
+ava_1.test("tonumber of a string returns 0", t => {
+    // Act
+    const result = index_1.tonumber("toto");
+    // Assert
+    t.is(result, 0);
+});

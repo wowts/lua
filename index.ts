@@ -39,7 +39,8 @@ export function next<T>(a:LuaArray<T>) {
 }
 
 export function tonumber(a: any):number {
-    return parseInt(a);
+    const result = parseInt(a);
+    return isNaN(result) ? 0 : result;
 }
 
 export function tostring(s: any): string {

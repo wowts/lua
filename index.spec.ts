@@ -1,5 +1,5 @@
 import { test } from "ava";
-import { LuaArray, lualength } from "./index";
+import { LuaArray, lualength, tonumber } from "./index";
 
 test("length of a two items array", t => {
     // Arrange
@@ -34,3 +34,19 @@ test("length of an empty array", t => {
     // Assert
     t.is(result, 0);
 });
+
+test("tonumber of a number returns a number", t => {
+    // Act
+    const result = tonumber("18");
+
+    // Assert
+    t.is(result, 18);
+})
+
+test("tonumber of a string returns 0", t => {
+    // Act
+    const result = tonumber("toto");
+
+    // Assert
+    t.is(result, 0);
+})
