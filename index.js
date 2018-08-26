@@ -34,7 +34,7 @@ function next(a) {
 }
 exports.next = next;
 function tonumber(a) {
-    const result = parseInt(a);
+    const result = parseFloat(a);
     return isNaN(result) ? 0 : result;
 }
 exports.tonumber = tonumber;

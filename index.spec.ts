@@ -43,6 +43,16 @@ test("tonumber of a number returns a number", t => {
     t.is(result, 18);
 })
 
+
+test("tonumber of a decimal number returns a number", t => {
+    // Act
+    const result = tonumber("18.5");
+
+    // Assert
+    t.is(result, 18.5);
+})
+
+
 test("tonumber of a string returns 0", t => {
     // Act
     const result = tonumber("toto");

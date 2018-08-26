@@ -47,7 +47,7 @@ export function next<T>(a:T) {
 }
 
 export function tonumber(a: any):number {
-    const result = parseInt(a);
+    const result = parseFloat(a);
     return isNaN(result) ? 0 : result;
 }
 

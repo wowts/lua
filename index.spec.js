@@ -32,6 +32,12 @@ ava_1.test("tonumber of a number returns a number", t => {
     // Assert
     t.is(result, 18);
 });
+ava_1.test("tonumber of a decimal number returns a number", t => {
+    // Act
+    const result = index_1.tonumber("18.5");
+    // Assert
+    t.is(result, 18.5);
+});
 ava_1.test("tonumber of a string returns 0", t => {
     // Act
     const result = index_1.tonumber("toto");
