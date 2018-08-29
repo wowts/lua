@@ -95,7 +95,7 @@ function unpack(t, first, count) {
 }
 exports.unpack = unpack;
 function tostringall(...text) {
-    return text.map(x => x.toString());
+    return text.map(x => x === undefined ? "nil" : x.toString());
 }
 exports.tostringall = tostringall;
 function select(index, t) {

@@ -106,7 +106,7 @@ export function unpack<T>(t:LuaArray<T>, first?:number, count?:number):(T|undefi
 }
 
 export function tostringall(...text: object[]){
-    return text.map(x => x.toString());
+    return text.map(x => x === undefined ? "nil" : x.toString());
 }
 
 export function select<T>(index: "#", t: T[]): number;
