@@ -9,8 +9,8 @@ export interface LuaObj<T> {
 }
 export declare function ipairs<T>(a: LuaArray<T>): [number, T][];
 export declare function pairs<T, TValue>(a: LuaMap<T, TValue>): [T, TValue][];
-export declare function pairs<T>(a: LuaObj<T>): [string, T][];
-export declare function pairs<T>(a: LuaArray<T>): [number, T][];
+export declare function pairs<T>(a: LuaObj<T>): [string, Diff<T, undefined>][];
+export declare function pairs<T>(a: LuaArray<T>): [number, Diff<T, undefined>][];
 declare type Diff<T, U> = T extends U ? never : T;
 export declare function kpairs<T>(a: T): [keyof typeof a, Diff<T[keyof typeof a], undefined>][];
 export declare function next<T>(a: T): (Extract<keyof T, string> | T[Extract<keyof T, string>])[] | undefined;

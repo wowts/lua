@@ -20,8 +20,8 @@ export function ipairs<T>(a:LuaArray<T>) {
 }
 
 export function pairs<T, TValue>(a: LuaMap<T, TValue>): [T, TValue][];
-export function pairs<T>(a: LuaObj<T>): [string, T][];
-export function pairs<T>(a: LuaArray<T>): [number, T][];
+export function pairs<T>(a: LuaObj<T>): [string, Diff<T, undefined>][];
+export function pairs<T>(a: LuaArray<T>): [number, Diff<T, undefined>][];
 export function pairs<T>(a: LuaObj<T>): [keyof typeof a, T][] {
     const pairs:[keyof typeof a, T][] = [];
     for (let k in a) {
