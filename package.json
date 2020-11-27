@@ -1,22 +1,22 @@
 {
-  "name": "@wowts/lua",
-  "version": "1.4.1",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "ava index.spec.js",
-    "test:watch": "ava -w index.spec.js",
-    "prepare": "tsc -p .",
-    "watch": "tsc -w"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "typescript": "^3.0.1",
-    "ava": "^0.25.0"
-  },
-  "repository": {
-    "url": "https://github.com/wowts/lua"
-  },
-  "types": "index.d.ts"
+    "name": "@wowts/lua",
+    "version": "1.5.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "ava index.spec.js",
+        "test:watch": "ava -w index.spec.js",
+        "prepare": "tsc -p .",
+        "watch": "tsc -w"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "typescript": "^4.1.2",
+        "ava": "^0.25.0"
+    },
+    "repository": {
+        "url": "https://github.com/wowts/lua"
+    },
+    "types": "index.d.ts"
 }
